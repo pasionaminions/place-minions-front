@@ -9,7 +9,7 @@ const mapStateToProps = state => {
     
 }
 
-class Component extends Component {
+class Genio extends Component {
     constructor(props) {
         super(props);
 
@@ -31,5 +31,5 @@ class Component extends Component {
         );
     }
 }
-const component = connect(mapStateToProps, mapDispatchToProps)(Component);
-export default component;
+const genio = connect(mapStateToProps, mapDispatchToProps)(Genio);
+export default genio;
