@@ -1,7 +1,7 @@
 import React from "react";
-import Component from "./Component";
+import MinionsMap from "./MinionsMap";
 
 const App = () => (
-    <Component/>
+    <MinionsMap/>
 );
 export default App;

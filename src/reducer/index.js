@@ -1,4 +1,4 @@
-import { DRAW_POINT, GET_POINTS } from "../Actions/action-types";
+import { DRAW_POINT, GET_POINTS } from "../action/action-types";
 
 const initialState = {
 }
