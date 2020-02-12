@@ -1,5 +1,5 @@
 import * as REST from "../lib/rest";
-import * as ACTIONS from "../Actions"
+import * as ACTIONS from "../action"
 
 const url = "https://wickapi.azurewebsites.net/api/pasionausers";
 
