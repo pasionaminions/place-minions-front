@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getPoints, getColors } from "../thunks";
+import { getPoints, getColors, drawPoint } from "../thunks";
 
 const mapDispatchToProps = {
-    getColors, getPoints
+    getColors, getPoints, drawPoint
 }
 
 const mapStateToProps = state => {
@@ -17,20 +17,28 @@ class MinionsMap extends Component {
 
 constructor(params) {
     super(params);
-    this.state={loaded:false};
+    this.state={loaded:false, x:0, y:0, color:0};
 }
 
 componentDidMount() {
-    let prom;
     if (this.props.Colors === undefined || this.props.Colors.length === 0) 
-        prom = this.props.getColors().then(() => this.props.getPoints());
+        this.props.getColors().then(() => this.loadPage());
     else 
-        prom = this.props.getPoints();
-    prom.then((_) => this.setState({loaded:true}));
+        this.loadPage();
 }
 
     handleChange = (event) => {
-        this.setState({ [event.target.id]: event.target.value });
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
+    loadPage = () => {
+        this.props.getPoints().then(() => this.setState({loaded:true}))
+    }
+
+    send = () => {
+        let obj = this.state;
+        obj.loaded = undefined;
+        this.props.drawPoint(obj).then(() => this.loadPage());
     }
 
     render() {
@@ -48,7 +56,10 @@ componentDidMount() {
                         })}
                     </div>
                     <div style={{width:200, height:600, margin: 13, border: "0.1px solid"}}>
-
+                        <input name="x" value={this.state.x} onChange={this.handleChange}></input>
+                        <input name="y" value={this.state.y} onChange={this.handleChange}></input>
+                        <input name="color" value={this.state.color} onChange={this.handleChange}></input>
+                        <button onClick={this.send} >SEND</button>
                     </div>
                 </div>
                 

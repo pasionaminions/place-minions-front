@@ -19,6 +19,6 @@ export function getColors() {
 
 export function drawPoint(point) {
     return function (dispatch) {
-        return REST.post(url, point).then((json) => dispatch(ACTIONS.drawPoint(json)))    
+        return REST.post(url  + "setp", point).then((json) => dispatch(ACTIONS.drawPoint(json)))    
     }
 }
