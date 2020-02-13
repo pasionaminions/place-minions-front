@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getPoints, getColors, drawPoint } from "../thunks";
 import { Button, Input } from 'reactstrap';
+import { BarLoader } from "react-spinners";
 import '../App.css';
 
 const mapDispatchToProps = {
@@ -54,7 +55,10 @@ componentDidMount() {
 
     render() {
         if  (!this.state.loaded) 
-            return <div style={{display:"flex", padding:300, justifyContent: "center"}}><h1>Loading...</h1></div>;
+            return <div style={{textAlign:"center", marginTop: 250}}>
+                <h1>Loading</h1>
+                <div style={{width:110, margin:"0 auto", marginTop: 30}}><BarLoader/></div>
+            </div>;
         return (
             <>  
                 <div style={{display:"flex", justifyContent: "center", backgroundColor: "#e68422"}}>
