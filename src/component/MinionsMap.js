@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getPoints, getColors, drawPoint } from "../thunks";
+import { Button, Input } from 'reactstrap';
+
 
 const mapDispatchToProps = {
     getColors, getPoints, drawPoint
@@ -25,7 +27,7 @@ componentDidMount() {
         this.props.getColors().then(() => this.loadPage());
     else 
         this.loadPage();
-}
+    }
 
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
@@ -42,7 +44,7 @@ componentDidMount() {
     }
 
     render() {
-        if  (!this.state.loaded) return <div>Loading...</div>;
+        //if  (!this.state.loaded) return <div>Loading...</div>;
         return (
             <>  
                 <div style={{display:"flex", justifyContent: "center"}}>
@@ -55,11 +57,12 @@ componentDidMount() {
                             </div>   
                         })}
                     </div>
-                    <div style={{width:200, height:600, margin: 13, border: "0.1px solid"}}>
-                        <input name="x" value={this.state.x} onChange={this.handleChange}></input>
-                        <input name="y" value={this.state.y} onChange={this.handleChange}></input>
-                        <input name="color" value={this.state.color} onChange={this.handleChange}></input>
-                        <button onClick={this.send} >SEND</button>
+                    <div style={{width:200, display:"flex", flexWrap:"wrap", height:600, margin: 13, border: "0.1px solid"}}>
+                        <Input style={{margin:10, width:180}} type="number" name="x" value={this.state.x} onChange={this.handleChange}></Input>
+                        <Input style={{margin:10, width:180}} name="y" value={this.state.y} onChange={this.handleChange}></Input>
+                        {this.props.Colors.map((x,i)=>{
+                            return <Button key={i} style={{margin:10, width:180, backgroundColor:x}} onClick={this.send}></Button>
+                        })}
                     </div>
                 </div>
                 
