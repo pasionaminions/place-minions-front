@@ -45,24 +45,24 @@ componentDidMount() {
     }
 
     render() {
-        //if  (!this.state.loaded) return <div>Loading...</div>;
+        if  (!this.state.loaded) return <div>Loading...</div>;
         return (
             <>  
                 <div style={{display:"flex", justifyContent: "center"}}>
-                    <div style={{width:600, margin:13}}>
+                    <div style={{width:700, margin:13}}>
                         {this.props.Points.map((x, indx)=>{
                             return <div key={indx} style={{display:"flex"}}>
                                 {x.map((y,indy)=>{
-                                    return <div key={indx+"-"+indy}style={{width:6, height:6, border: "0.1px solid", backgroundColor: this.props.Colors[y]}}></div>
+                                    return <div key={indx+"-"+indy}style={{width:7, height:7, border: "1px solid", backgroundColor: this.props.Colors[y]}}></div>
                                 })}  
                             </div>   
                         })}
                     </div>
-                    <div style={{width:200, display:"flex", flexWrap:"wrap", height:600, margin: 13, border: "0.1px solid"}}>
+                    <div style={{width:200, display:"flex", flexWrap:"wrap", height:600, margin: 13, border: "1px solid"}}>
                         <Input style={{margin:10, width:180}} type="number" name="x" value={this.state.x} onChange={this.handleChange}></Input>
                         <Input style={{margin:10, width:180}} type="number" name="y" value={this.state.y} onChange={this.handleChange}></Input>
                         {this.props.Colors.map((x,i)=>{
-                            return <Button name={x} key={i} style={{margin:10, marginTop:4, width:180, backgroundColor:x}} onClick={()=>{this.send(x)}}></Button>
+                            return <Button name={x} key={i} style={{margin:10, marginTop:4, width:180, backgroundColor:x}} onClick={()=>{this.send(i)}}></Button>
                         })}
                     </div>
                 </div>
