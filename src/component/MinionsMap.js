@@ -53,7 +53,8 @@ componentDidMount() {
     }
 
     render() {
-        if  (!this.state.loaded) return <div>Loading...</div>;
+        if  (!this.state.loaded) 
+            return <div style={{display:"flex", padding:300, justifyContent: "center"}}><h1>Loading...</h1></div>;
         return (
             <>  
                 <div style={{display:"flex", justifyContent: "center", backgroundColor: "#e68422"}}>
