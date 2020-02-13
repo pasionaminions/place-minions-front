@@ -7,41 +7,42 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => {
-    return{
-        Color: state.color,
+    return {
+        Colors: state.Colors,
         Points: state.Points
     }
 }
 
 class MinionsMap extends Component {
 
-    componentDidMount() {
-        getPoints();
-    }
+constructor(params) {
+    super(params);
+    this.state={loaded:false};
+}
+
+componentDidMount() {
+    let prom;
+    if (this.props.Colors === undefined || this.props.Colors.length === 0) 
+        prom = this.props.getColors().then(() => this.props.getPoints());
+    else 
+        prom = this.props.getPoints();
+    prom.then((_) => this.setState({loaded:true}));
+}
 
     handleChange = (event) => {
         this.setState({ [event.target.id]: event.target.value });
     }
 
     render() {
-        
-        let array = [];
-        for (let i = 0; i < 100; i++) {
-            let fila = [];
-            for (let j = 0; j < 100; j++) {
-                fila[j] = j;
-            }
-            array.push(fila);
-        }
-
+        if  (!this.state.loaded) return <div>Loading...</div>;
         return (
             <>  
                 <div style={{display:"flex", justifyContent: "center"}}>
                     <div style={{width:600, margin:13}}>
-                        {array.map(x=>{
-                            return <div style={{display:"flex"}}>
-                                {x.map(y=>{
-                                    return <div style={{width:6, height:6, border: "0.1px solid"}}></div>
+                        {this.props.Points.map((x, indx)=>{
+                            return <div key={indx} style={{display:"flex"}}>
+                                {x.map((y,indy)=>{
+                                    return <div key={indx+"-"+indy}style={{width:6, height:6, border: "0.1px solid", backgroundColor: this.props.Colors[y]}}></div>
                                 })}  
                             </div>   
                         })}

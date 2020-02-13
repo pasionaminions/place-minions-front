@@ -2,12 +2,10 @@
 async function noBody(url, method) {
     let response = await fetch(url, {method: method});
     
-    
     return await manageResponse(response);
 }
 
 async function manageResponse(response) {
-
     if (!response.ok) throw new Error(
         "error fetch con url "+ response.url + "\nStatus - " + response.status + "\n" + response.statusText +"\nBody: " + JSON.stringify(response.body));
     
@@ -15,6 +13,7 @@ async function manageResponse(response) {
 
 
     let json = await response.json();
+    console.log(json);
     
     return json;
 }

@@ -1,17 +1,19 @@
 import * as REST from "../lib/rest";
 import * as ACTIONS from "../action"
 
-const url = "https://wickapi.azurewebsites.net/api/pasionausers";
+const url = "https://localhost:44367/api/Place/";
+
+window.REST = REST;
 
 export function getPoints() {
     return function (dispatch) {
-        return REST.get(url).then((json) => dispatch(ACTIONS.getPoints(json)))    
+        return REST.get(url + "map").then((json) => dispatch(ACTIONS.getPoints(json)))    
     }
 }
 
 export function getColors() {
     return function (dispatch) {
-        return REST.get(url).then((json) => dispatch(ACTIONS.getColors(json)))    
+        return REST.get(url + "colors").then((json) => dispatch(ACTIONS.getColors(json)))    
     }
 }
 
