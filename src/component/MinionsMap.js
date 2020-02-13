@@ -37,8 +37,9 @@ componentDidMount() {
         this.props.getPoints().then(() => this.setState({loaded:true}))
     }
 
-    send = () => {
+    send = (x) => {
         let obj = this.state;
+        obj.color = x;
         obj.loaded = undefined;
         this.props.drawPoint(obj).then(() => this.loadPage());
     }
@@ -59,9 +60,9 @@ componentDidMount() {
                     </div>
                     <div style={{width:200, display:"flex", flexWrap:"wrap", height:600, margin: 13, border: "0.1px solid"}}>
                         <Input style={{margin:10, width:180}} type="number" name="x" value={this.state.x} onChange={this.handleChange}></Input>
-                        <Input style={{margin:10, width:180}} name="y" value={this.state.y} onChange={this.handleChange}></Input>
+                        <Input style={{margin:10, width:180}} type="number" name="y" value={this.state.y} onChange={this.handleChange}></Input>
                         {this.props.Colors.map((x,i)=>{
-                            return <Button key={i} style={{margin:10, width:180, backgroundColor:x}} onClick={this.send}></Button>
+                            return <Button name={x} key={i} style={{margin:10, marginTop:4, width:180, backgroundColor:x}} onClick={()=>{this.send(x)}}></Button>
                         })}
                     </div>
                 </div>
